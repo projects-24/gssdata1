@@ -1,0 +1,15 @@
+
+*{
+  font-family: var(--font-font);
+  font-size: 0.89rem;
+}
+._card{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  padding: 1rem;
+  border-radius: 2rem;
+  background-color: #FFFFFF;
+}
+.input{border: 0.5rem solid #FFFFFF;transition: 0.2s ease-in;}
+.input:focus{
+  border-left: 0.5rem solid #a283f7 !important;
+}
