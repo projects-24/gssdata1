@@ -61,24 +61,7 @@ const handleSubmit = (e) => {
             </div>
             <div>
         <SectionUI gap={4} />
-
-      <div>
-      <InputUi label="Box Number"  onChange={handleChange} name='box_number'  hint={"*******"}/>
-      </div>
-      <SectionUI gap={2} />
-        <RowFlexUi responsiveSmall gap={1}>
-          <div className='col'>
-            <InputUi label="Model"  onChange={handleChange} name='model' select options={[
-              {value: 'SM-T295NZKAACR', text: 'SM-T295NZKAACR'},
-              {value: 'KOB-L09', text: 'KOB-L09'},
-              {value: 'BIO-WOLF C', text: 'BIO-WOLF C'},
-            ]}/>
-          </div>
-          <div className='col'>
-            <InputUi label="Battery%"  onChange={handleChange} name='battery' type='number'/>
-          </div>
-        </RowFlexUi>
-        <SectionUI gap={2} />
+  
         <RowFlexUi responsiveSmall gap={1}>
           <div className='col'>
             <InputUi label="Region" select  onChange={handleChange} name='region' options={[
@@ -117,12 +100,14 @@ const handleSubmit = (e) => {
 
         </RowFlexUi>
         <SectionUI gap={2} />
-          <div >
-            <InputUi label="Serial Number" />
-          </div>
+
+      <div>
+      <InputUi label="Box Number"  onChange={handleChange} name='box_number'  hint={"*******"}/>
+      </div>
+    
         <SectionUI gap={2} />
           <div >
-            <TextUi text='Physical inspection' block funcss='margin-bottom-10 margin-top-20' bold color='primary'/>
+            <TextUi text='Brand' block funcss='margin-bottom-10 margin-top-20' bold color='primary'/>
             <RowFlexUi gap={2} >
             <RowFlexUi gap={0.5}>
                         <input
@@ -156,7 +141,25 @@ const handleSubmit = (e) => {
                     </RowFlexUi>
             </RowFlexUi>
           </div>
-         
+          <SectionUI gap={2} />
+        
+      <SectionUI gap={2} />
+      <RowFlexUi responsiveSmall gap={1}>
+          <div className='col'>
+            <InputUi label="Model"  onChange={handleChange} name='model' select options={[
+              {value: 'SM-T295NZKAACR', text: 'SM-T295NZKAACR'},
+              {value: 'KOB-L09', text: 'KOB-L09'},
+              {value: 'BIO-WOLF C', text: 'BIO-WOLF C'},
+            ]}/>
+          </div>
+          <div className='col'>
+            <InputUi label="Serial Number" />
+          </div>
+        </RowFlexUi>
+        <SectionUI gap={2} />
+        <div >
+        <InputUi label="Battery%"  onChange={handleChange} name='battery' type='number'/>
+          </div>
 
             <SectionUI gap={2} />
             <div>
