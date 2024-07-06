@@ -3,7 +3,6 @@ import "../assets/globals.css";
 import 'funuicss/css/fun.css'
 import "aos/dist/aos.css"
 import "aos/dist/aos.css"
-import NavBar from "@/ui/NavBar";
 
 
 const font = Montserrat({ subsets:[], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] });
@@ -16,7 +15,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <body className={font.className}>
-        <NavBar />
         <div className="dark800 text-dark200 " style={{minHeight:'100vh'}}>
         {children}
         </div>

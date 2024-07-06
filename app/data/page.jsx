@@ -8,6 +8,7 @@ import TextUi from '@/ui/Text'
 import UiButton from '@/ui/button'
 import CircleUi from '@/ui/Circle'
 import { PiPen, PiPrinter, PiTrash } from 'react-icons/pi'
+import NavBar from '@/ui/NavBar'
 export default function Data() {
       const data = [
         {
@@ -91,6 +92,7 @@ export default function Data() {
     
   return (
     <div className='padding-top-90 padding-bottom-20'>
+      <NavBar />
         <div className="container">
             <h1 className='h1 text-bold'>Data</h1>
             <p>This is where you will see all the collected data.</p>

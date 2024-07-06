@@ -13,3 +13,11 @@
 .input:focus{
   border-left: 0.5rem solid #a283f7 !important;
 }
+
+.no-padding{
+  padding: 0 !important;
+}
+
+._content{
+  padding: 100px 5% 2rem 5%;
+}

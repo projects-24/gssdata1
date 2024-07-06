@@ -8,13 +8,18 @@ import TextUi from './Text'
 
 export default function NavBar() {
   return <AppBar 
-  funcss='card height-70'
+  funcss='card height-70 '
   fixedTop
-  left={<TextUi text="GSS"/>}
-  center={<RowFlexUi gap={2}>
-    <Link href={'/'}>
+  left={<TextUi text="Tablet Retrieval system" heading='h4' bold color='dark400'/>}
+  right={<RowFlexUi gap={2}>
+    <Link href={'/dashboard'}>
     <RowFlexUi gap={0.2}> 
-    <PiHouse /> <TextUi text="Home" size='smaller' bold color='dark300' uppercase/>    
+    <PiChartDonut /> <TextUi text="Dashboard" size='smaller' bold color='dark300' uppercase/>    
+    </RowFlexUi> 
+    </Link>
+    <Link href={'/form'}>
+    <RowFlexUi gap={0.2}> 
+    <PiHouse /> <TextUi text="Form" size='smaller' bold color='dark300' uppercase/>    
     </RowFlexUi> 
     </Link>
     <Link href={'/data'}>

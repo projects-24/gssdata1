@@ -12,11 +12,7 @@ export default function GraphContainer({title, subtitle, bottom, right, children
                 <TextUi text={title || ''} heading='h2' bold color='dark400' block/>
                 <TextUi text={subtitle || ''}  bold color='dark300' size='minified' />
                 </div>
-              {
-                right ? right :   <div>
-                <img src='/svg/arrow.svg' width={"30px"} style={{transform:'rotate(100deg)'}}/>
-            </div>
-              }
+              {right || ''}
              </RowFlexUi>
              <SectionUI gap={2}/>
            <div className="dark900 padding-20 roundEdgeSmall" style={{overflowX:'auto'}}>

@@ -6,6 +6,7 @@ import RowFlexUi from '@/ui/RowFlex'
 import InputUi from '@/ui/input'
 import UiButton from '@/ui/button'
 import { PiPaperPlane, PiPrinter } from 'react-icons/pi'
+import NavBar from '@/ui/NavBar'
 
 export default function Print() {
     let data = {
@@ -17,6 +18,8 @@ export default function Print() {
      
     }
   return (
+   <div>
+    <NavBar />
     <FullCenteredPage>
  <div className="width-700-max fit padding">
     <div className="container">
@@ -69,5 +72,6 @@ export default function Print() {
  
       </div>
     </FullCenteredPage>
+   </div>
   )
 }
