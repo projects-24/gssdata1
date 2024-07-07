@@ -17,97 +17,81 @@ const data = [
         "region": "Greater Accra",
         "functioning": 4000,
         "not_functioning": 2400,
-        "percent": 60
     },
     {
         "region": "Ashanti",
         "functioning": 5000,
         "not_functioning": 3000,
-        "percent": 60
     },
     {
         "region": "Bono",
         "functioning": 2000,
         "not_functioning": 1200,
-        "percent": 60
     },
     {
         "region": "Bono East",
         "functioning": 3000,
         "not_functioning": 1800,
-        "percent": 60
     },
     {
         "region": "Ahafo",
         "functioning": 1500,
         "not_functioning": 900,
-        "percent": 60
     },
     {
         "region": "Central",
         "functioning": 3500,
         "not_functioning": 2100,
-        "percent": 60
     },
     {
         "region": "Eastern",
         "functioning": 4500,
         "not_functioning": 2700,
-        "percent": 60
     },
     {
         "region": "Northern",
         "functioning": 4000,
         "not_functioning": 2400,
-        "percent": 60
     },
     {
         "region": "Savannah",
         "functioning": 1000,
         "not_functioning": 600,
-        "percent": 60
     },
     {
         "region": "North East",
         "functioning": 1200,
         "not_functioning": 720,
-        "percent": 60
     },
     {
         "region": "Upper East",
         "functioning": 2200,
         "not_functioning": 1320,
-        "percent": 60
     },
     {
         "region": "Upper West",
         "functioning": 1800,
         "not_functioning": 1080,
-        "percent": 60
     },
     {
         "region": "Volta",
         "functioning": 2500,
         "not_functioning": 1500,
-        "percent": 60
     },
     {
         "region": "Oti",
         "functioning": 1100,
         "not_functioning": 660,
-        "percent": 60
     },
     {
         "region": "Western",
         "functioning": 3700,
         "not_functioning": 2220,
-        "percent": 60
     },
     {
         "region": "Western North",
         "functioning": 1300,
         "not_functioning": 780,
-        "percent": 60
     }
     ,
     {

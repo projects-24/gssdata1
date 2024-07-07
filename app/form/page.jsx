@@ -68,6 +68,10 @@ const handleSubmit = (e) => {
               {value: '', text: 'Select Region'},
               {value: 'Western', text: 'Western'},
               {value: 'Eastern', text: 'Eastern'},
+              {value: 'Ashanti', text: 'Ashanti'},
+              {value: 'Northen', text: 'Northen'},
+              {value: 'Central', text: 'Central'},
+              {value: 'Greater Accra', text: 'Greater Accra'},
             ]}/>
           </div>
           <div className='col'>
@@ -76,20 +80,42 @@ const handleSubmit = (e) => {
               [
                   {value: '', text: 'Select District' 
                 } ,
-                {value: 'Jomoro Municipal', text: 'Jomoro Municipal' },
-                {value: 'Ellembelle', text: 'Ellembelle' },
-                {value: 'Nzema East Municipal', text: 'Nzema East Municipal' },
-                {value: 'Ahanta West Municipal', text: 'Ahanta West Municipal' },
-                {value: 'Effia Kwesimintsim Municipal', text: 'Effia Kwesimintsim Municipal' },
+                {value: 'STMA-Takoradi', text: 'STMA-Takoradi' },
+                {value: 'STMA-Secondi', text: 'STMA-Secondi' },
+                {value: 'STMA-Essiko', text: 'STMA-Essiko' },
               ]
-              : formData.region == 'Eastern'  ?
+              : formData.region == 'Central'  ?
               [
                   {value: '', text: 'Select District' },
-                  {value: 'Akuapim South', text: 'Akuapim South' },
-                  {value: 'Asuogyaman', text: 'Asuogyaman' },
-                  {value: 'Birim Central', text: 'Birim Central' },
-                  {value: 'Birim South', text: 'Birim South' },
-                  {value: 'Denkyembour', text: 'Denkyembour' },
+                  {value: 'CCMA-Cape Coast South', text: 'CCMA-Cape Coast South' },
+                  {value: 'CCMA-Cape Coast North', text: 'CCMA-Cape Coast North' },
+              ] 
+        
+              : formData.region == 'Greater Accra'  ?
+              [
+                  {value: '', text: 'Select District' },
+                  {value: 'AMA-Ablekuma South', text: 'AMA-Ablekuma South' },
+                  {value: 'AMA-Ashiedu Keteke', text: 'AMA-Ashiedu Keteke' },
+                  {value: 'AMA-Okaikoi South', text: 'AMA-Okaikoi South' },
+                  {value: 'TMA-Tema Central', text: 'TMA-Tema Central' },
+                  {value: 'TMA-Tema East', text: 'TMA-Tema East' },
+              ] 
+        
+              : formData.region == 'Ashanti'  ?
+              [
+                  {value: '', text: 'Select District' },
+                  {value: 'KMA-Nhyiaeso', text: 'KMA-Nhyiaeso' },
+                  {value: 'KMA-Subin', text: 'KMA-Subin' },
+                  {value: 'KMA-Manhyia South', text: 'KMA-Manhyia South' },
+                  {value: 'KMA-Manhyia North', text: 'KMA-Manhyia North' },
+                  {value: 'KMA-Bantama', text: 'KMA-Bantama' },
+              ] 
+        
+              : formData.region == 'Northen'  ?
+              [
+                  {value: '', text: 'Select District' },
+                  {value: 'TMA-Tamale South', text: 'TMA-Tamale South' },
+                  {value: 'TMA-Tamale Central', text: 'TMA-Tamale Central' }
               ] 
         
               :       [
