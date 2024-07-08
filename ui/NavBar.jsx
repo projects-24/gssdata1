@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import AppBar from 'funuicss/ui/appbar/AppBar'
 import Logo from './Logo'
-import { PiChartBar, PiChartDonut, PiDeviceMobile, PiHouse, PiList, PiListDuotone, PiPhone, PiProjectorScreen, PiTrendUp, PiUserPlus } from 'react-icons/pi'
+import { PiChartBar, PiChartDonut, PiDeviceMobile, PiHouse, PiList, PiListDuotone, PiPhone, PiProjectorScreen, PiTable, PiTrendUp, PiUserPlus } from 'react-icons/pi'
 import RowFlexUi from './RowFlex'
 import Link from 'next/link'
 import TextUi from './Text'
@@ -47,6 +47,15 @@ export default function NavBar() {
       <PiDeviceMobile /> <TextUi text="Form" size='smaller' bold color='dark300' uppercase/>    
       </RowFlexUi> 
       </Link>
+      {
+      user.level.toLowerCase() == 'admin' && 
+      <Link href={'/data'}>
+      <RowFlexUi gap={0.2}> 
+      <PiTable /> <TextUi text="Tabular" size='smaller' bold color='dark300' uppercase/>    
+      </RowFlexUi> 
+      </Link>
+   
+    }
     {/* <Link href={'/data'}>
    <RowFlexUi gap={0.2}>
    <PiChartBar /> <TextUi text="Statistics" size='smaller' bold color='dark300' uppercase/> 

@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React, { useState, useLayoutEffect, useEffect } from 'react';
 import FullCenteredPage from 'funuicss/ui/specials/FullCenteredPage';
 import TextUi from '@/ui/Text';
@@ -14,7 +14,7 @@ import AlertUi from '@/ui/Alert';
 import Axios from 'axios';
 import { URI } from '@/functions/uri';
 import { GetToken } from '@/functions/Auth';
-import { headers } from 'next/headers';
+import { regions } from '@/functions/get_regions';
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -31,6 +31,8 @@ export default function Home() {
     battery_level: '',
     status: ''
   });
+
+  const [selected_region, setselected_region] = useState('')
 
   const [message, setMessage] = useState('');
   const [alertState, setAlertState] = useState(false);
@@ -72,26 +74,27 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(formData);
+    let data = formData
+    data.region = selected_region
+    console.log(data)
     console.log(tk)
     if(
-        !formData.accessories ||
-        !formData.battery_level ||
-        !formData.box_number ||
-        !formData.brand ||
-        !formData.district ||
-        !formData.functionality ||
-        !formData.model ||
-        !formData.region ||
-        !formData.screen ||
-        !formData.serial_number ||
-        !formData.status ||
-        !formData.touch_capability 
+        formData.accessories ||
+        formData.battery_level ||
+        formData.box_number ||
+        formData.brand ||
+        formData.district ||
+        formData.functionality ||
+        formData.model ||
+        formData.region ||
+        formData.screen ||
+        formData.serial_number ||
+        formData.status ||
+        formData.touch_capability 
 
     ){
         try {
-            let data = formData 
-            console.log(data)
+       
           const res = await Axios.post(`${URI}/add`, data,  {
             headers: {
               Authorization: `Bearer ${tk}`
@@ -119,6 +122,7 @@ export default function Home() {
         <NavBar />
       {isLoading && <LoaderUi />}
       {alertState && <AlertUi message={message} success={alertState === 'success'} />}
+  
       <form >
         <FullCenteredPage funcss='padding-top-80'>
       <div className="width-600-max fit padding">
@@ -131,64 +135,50 @@ export default function Home() {
   
         <RowFlexUi responsiveSmall gap={1}>
           <div className='col'>
-            <InputUi label="Region" select  onChange={handleChange} name='region' options={[
-              {value: '', text: 'Select Region'},
-              {value: 'Western', text: 'Western'},
-              {value: 'Eastern', text: 'Eastern'},
-              {value: 'Ashanti', text: 'Ashanti'},
-              {value: 'Northen', text: 'Northen'},
-              {value: 'Central', text: 'Central'},
-              {value: 'Greater Accra', text: 'Greater Accra'},
-            ]}/>
+          <TextUi 
+    text={`Region`} 
+    block 
+    size='smaller' 
+    uppercase 
+    bold 
+    color='primary'
+    funcss='margin-bottom-10'
+    />
+            <select className='input _input full-width _card roundEdgeSmall borderless '  onChange={(e) => setselected_region(e.target.value)}>
+              <option value="">Region</option>
+              {
+                regions().map((doc) =>(
+                  <option key={doc.region} value={doc.region}>{doc.region}</option>
+                ))
+              }
+            </select>
+ 
           </div>
           <div className='col'>
-            <InputUi label="District" name='district'  onChange={handleChange} select options={
-              formData.region =='Western' ?
-              [
-                  {value: '', text: 'Select District' 
-                } ,
-                {value: 'STMA-Takoradi', text: 'STMA-Takoradi' },
-                {value: 'STMA-Secondi', text: 'STMA-Secondi' },
-                {value: 'STMA-Essiko', text: 'STMA-Essiko' },
-              ]
-              : formData.region == 'Central'  ?
-              [
-                  {value: '', text: 'Select District' },
-                  {value: 'CCMA-Cape Coast South', text: 'CCMA-Cape Coast South' },
-                  {value: 'CCMA-Cape Coast North', text: 'CCMA-Cape Coast North' },
-              ] 
-        
-              : formData.region == 'Greater Accra'  ?
-              [
-                  {value: '', text: 'Select District' },
-                  {value: 'AMA-Ablekuma South', text: 'AMA-Ablekuma South' },
-                  {value: 'AMA-Ashiedu Keteke', text: 'AMA-Ashiedu Keteke' },
-                  {value: 'AMA-Okaikoi South', text: 'AMA-Okaikoi South' },
-                  {value: 'TMA-Tema Central', text: 'TMA-Tema Central' },
-                  {value: 'TMA-Tema East', text: 'TMA-Tema East' },
-              ] 
-        
-              : formData.region == 'Ashanti'  ?
-              [
-                  {value: '', text: 'Select District' },
-                  {value: 'KMA-Nhyiaeso', text: 'KMA-Nhyiaeso' },
-                  {value: 'KMA-Subin', text: 'KMA-Subin' },
-                  {value: 'KMA-Manhyia South', text: 'KMA-Manhyia South' },
-                  {value: 'KMA-Manhyia North', text: 'KMA-Manhyia North' },
-                  {value: 'KMA-Bantama', text: 'KMA-Bantama' },
-              ] 
-        
-              : formData.region == 'Northen'  ?
-              [
-                  {value: '', text: 'Select District' },
-                  {value: 'TMA-Tamale South', text: 'TMA-Tamale South' },
-                  {value: 'TMA-Tamale Central', text: 'TMA-Tamale Central' }
-              ] 
-        
-              :       [
-                  {value: '', text: 'Select Regon' },
-              ] 
-            }/>
+          <TextUi 
+    text={`District`} 
+    block 
+    size='smaller' 
+    uppercase 
+    bold 
+    color='primary'
+    funcss='margin-bottom-10'
+    />
+          <select name='district' className='input _input full-width _card roundEdgeSmall borderless ' onChange={handleChange}>
+              <option value="">District</option>
+             {
+              selected_region ? 
+              <>
+                {
+                  regions().filter(r => r.region === selected_region)[0].districts.map((doc) =>(
+                    <option key={doc} value={doc}>{doc}</option>
+                  ))
+                }
+              </>
+              : <></>
+             }
+            </select>
+
           </div>
 
         </RowFlexUi>
@@ -204,7 +194,7 @@ export default function Home() {
             <RowFlexUi gap={2} >
             <RowFlexUi gap={0.5}>
                         <input
-                        className='width-30 height-30'
+                        className='width-20 height-20'
                             type="radio"
                             name="brand"
                             value="Samsung"
@@ -214,7 +204,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                        className='width-30 height-30'
+                        className='width-20 height-20'
                             type="radio"
                             name="brand"
                             value="Huawei"
@@ -224,7 +214,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                        className='width-30 height-30'
+                        className='width-20 height-20'
                             type="radio"
                             name="brand"
                             value="Bio-rugged"
@@ -240,13 +230,14 @@ export default function Home() {
       <RowFlexUi responsiveSmall gap={1}>
           <div className='col'>
             <InputUi label="Model"  onChange={handleChange} name='model' select options={[
+              {value: '', text: 'Model'},
               {value: 'SM-T295NZKAACR', text: 'SM-T295NZKAACR'},
               {value: 'KOB-L09', text: 'KOB-L09'},
               {value: 'BIO-WOLF C', text: 'BIO-WOLF C'},
             ]}/>
           </div>
           <div className='col'>
-            <InputUi label="Serial Number" />
+            <InputUi label="Serial Number"  name='serial_number' onChange={handleChange}/>
           </div>
         </RowFlexUi>
         <SectionUI gap={2} />
@@ -260,7 +251,7 @@ export default function Home() {
                 <RowFlexUi gap={2} funcss='bb padding-bottom-10'>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="screen"
                             value="No cracks"
@@ -270,7 +261,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="screen"
                             value="Slightly cracked"
@@ -280,7 +271,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="screen"
                             value="Deeply cracked"
@@ -297,7 +288,7 @@ export default function Home() {
                 <RowFlexUi gap={2} funcss='bb padding-bottom-10'>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="functionality"
                             value="Functioning"
@@ -307,7 +298,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="functionality"
                             value="Not Functioning(Defective)"
@@ -324,7 +315,7 @@ export default function Home() {
                 <RowFlexUi gap={2} funcss='bb padding-bottom-10'>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="touch_capability"
                             value="Good"
@@ -334,7 +325,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="touch_capability"
                             value="Not good"
@@ -351,7 +342,7 @@ export default function Home() {
                 
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="accessories"
                             value="Only head"
@@ -361,7 +352,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="accessories"
                             value="Only cable"
@@ -371,7 +362,7 @@ export default function Home() {
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="accessories"
                             value=" Both (complete)"
@@ -387,23 +378,23 @@ export default function Home() {
                 <RowFlexUi gap={2} funcss='bb padding-bottom-10'>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="status"
-                            value="Good"
-                            checked={formData.status === 'Good'}
+                            value="Active"
+                            checked={formData.status === 'Active'}
                             onChange={handleChange}
-                        /> Good
+                        /> Active
                     </RowFlexUi>
                     <RowFlexUi gap={0.5}>
                         <input
-                            className='width-30 height-30'
+                            className='width-20 height-20'
                             type="radio"
                             name="status"
-                            value="Not good"
-                            checked={formData.status === 'Not good'}
+                            value="Not Active"
+                            checked={formData.status === 'Not Active'}
                             onChange={handleChange}
-                        /> Not good
+                        /> Not Active
                     </RowFlexUi>
                 </RowFlexUi>
             </div>
