@@ -2,7 +2,7 @@ export const SaveToken = (user , token) => {
     return new Promise((resolve, reject) => {
         sessionStorage.setItem("tk" , JSON.stringify(token))
         sessionStorage.setItem("me" , JSON.stringify(user))
-        window.location.assign('/form')
+        window.location.assign(user.level.toLowerCase() == 'admin' ? '/dashboard' : '/form')
     })
 }
 
