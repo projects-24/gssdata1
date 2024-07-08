@@ -14,6 +14,7 @@ import AlertUi from '@/ui/Alert';
 import Axios from 'axios';
 import { URI } from '@/functions/uri';
 import { GetToken } from '@/functions/Auth';
+import { headers } from 'next/headers';
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -90,9 +91,12 @@ export default function Home() {
     ){
         try {
             let data = formData 
-            data.added_username = user.email
             console.log(data)
-          const res = await Axios.post(`${URI}/add`, data);
+          const res = await Axios.post(`${URI}/add`, data,  {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
           setIsLoading(false);
           setMessage('Form submitted successfully');
           setAlertState('success');
