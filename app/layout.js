@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" >
       <body className={font.className}>
-        <div className="dark800 text-dark200 " style={{minHeight:'100vh'}}>
+        <div className="dark800  text-dark200 " style={{height:'100%'}}>
         {children}
         </div>
       </body>

@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 
 const PieGraph = dynamic(()=>import("@/ui/Pie") ,{ssr:false})
 
-export default function ClientFunctioning() {
+export default function Brand() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ export default function ClientFunctioning() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios.get(URI + '/devicefunctionality');
+        const response = await Axios.get(URI + '/devicebrand');
         setData(response.data);
         console.log(response)
       } catch (error) {
@@ -34,7 +34,7 @@ export default function ClientFunctioning() {
 
   return (
     <div>
-      <PieGraph id={"functioning"} data={data} title={"Functional & Non Functioning"} subtitle="This graph shows data on functioning and non functioning devices"/>
+      <PieGraph id={"devicebrand"} data={data} title={"Brand"} subtitle="This graph shows data on device brand"/>
     </div>
   );
 }

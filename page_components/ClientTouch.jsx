@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic'
 
 const PieGraph = dynamic(()=>import("@/ui/Pie") ,{ssr:false})
 
-export default function ClientFunctioning() {
+export default function ClientTouch() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,9 +16,8 @@ export default function ClientFunctioning() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await Axios.get(URI + '/devicefunctionality');
+        const response = await Axios.get(URI + '/devicetouchcapability');
         setData(response.data);
-        console.log(response)
       } catch (error) {
         setError('Failed to fetch data');
       } finally {
@@ -34,7 +33,7 @@ export default function ClientFunctioning() {
 
   return (
     <div>
-      <PieGraph id={"functioning"} data={data} title={"Functional & Non Functioning"} subtitle="This graph shows data on functioning and non functioning devices"/>
+      <PieGraph id={"touch_capability"} data={data} title={"Touch Capability"} subtitle="This graph shows data on Touch Capability"/>
     </div>
   );
 }

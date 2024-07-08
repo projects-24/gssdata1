@@ -1,58 +1,121 @@
+'use client';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
+import FullCenteredPage from 'funuicss/ui/specials/FullCenteredPage';
+import TextUi from '@/ui/Text';
+import SectionUI from '@/ui/section';
+import RowFlexUi from '@/ui/RowFlex';
+import InputUi from '@/ui/input';
+import UiButton from '@/ui/button';
+import { PiPaperPlane } from 'react-icons/pi';
+import NavBar from '@/ui/NavBar';
+import AnimationUi from '@/ui/Animation';
+import LoaderUi from '@/ui/LoaderUi';
+import AlertUi from '@/ui/Alert';
+import Axios from 'axios';
+import { URI } from '@/functions/uri';
+import { GetToken } from '@/functions/Auth';
 
-
-'use client'
-import React, { useState } from 'react'
-import FullCenteredPage from 'funuicss/ui/specials/FullCenteredPage'
-import TextUi from '@/ui/Text'
-import SectionUI from '@/ui/section'
-import RowFlexUi from '@/ui/RowFlex'
-import InputUi from '@/ui/input'
-import UiButton from '@/ui/button'
-import { PiPaperPlane } from 'react-icons/pi'
-import NavBar from '@/ui/NavBar'
 export default function Home() {
   const [formData, setFormData] = useState({
-    boxNumber: '',
+    box_number: '',
     region: '',
     district: '',
     brand: '',
     model: '',
-    serialNumber: '',
-    physicalInspection: '',
+    serial_number: '',
     screen: '',
     functionality: '',
-    touch: '',
+    touch_capability: '',
     accessories: '',
-    battery: '',
+    battery_level: '',
     status: ''
-});
+  });
 
+  const [message, setMessage] = useState('');
+  const [alertState, setAlertState] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setuser] = useState('')
+  const [tk, settk] = useState('')
 
+  useEffect(() => {
+    GetToken()
+    .then(res => {
+      setuser(res.user)
+      settk(res.token)
+    })
+  }, [])
+  
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      setMessage('');
+      setAlertState(false);
+    }, 2000);
+  }, [alertState, message]);
 
-const updateDistricts = (selectedRegion) => {
+  const updateDistricts = (selectedRegion) => {
     setFormData({
-        ...formData,
-        region: selectedRegion,
-        district: ''
+      ...formData,
+      region: selectedRegion,
+      district: ''
     });
-};
+  };
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
-        ...formData,
-        [name]: value
+      ...formData,
+      [name]: value
     });
-};
+  };
 
-const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     console.log(formData);
-    // Handle form submission (e.g., send to API)
-};
+    console.log(tk)
+    if(
+        !formData.accessories ||
+        !formData.battery_level ||
+        !formData.box_number ||
+        !formData.brand ||
+        !formData.district ||
+        !formData.functionality ||
+        !formData.model ||
+        !formData.region ||
+        !formData.screen ||
+        !formData.serial_number ||
+        !formData.status ||
+        !formData.touch_capability 
+
+    ){
+        try {
+            let data = formData 
+            data.added_username = user.user_id
+            console.log(data)
+          const res = await Axios.post(`${URI}/add`, data);
+          setIsLoading(false);
+          setMessage('Form submitted successfully');
+          setAlertState('success');
+          console.log(res);
+        } catch (err) {
+          setIsLoading(false);
+          setMessage('Failed to submit form');
+          setAlertState('error');
+          console.log(err);
+        }
+    }else{
+        setMessage('Please fill all required fields');
+        setAlertState('error');
+        setIsLoading(false);
+    }
+  };
+
   return (
     <div>
         <NavBar />
+      {isLoading && <LoaderUi />}
+      {alertState && <AlertUi message={message} success={alertState === 'success'} />}
+      <form >
         <FullCenteredPage funcss='padding-top-80'>
       <div className="width-600-max fit padding">
         <div className="">
@@ -184,7 +247,7 @@ const handleSubmit = (e) => {
         </RowFlexUi>
         <SectionUI gap={2} />
         <div >
-        <InputUi label="Battery%"  onChange={handleChange} name='battery' type='number'/>
+        <InputUi label="Battery%"  onChange={handleChange} name='battery_level' type='number'/>
           </div>
 
             <SectionUI gap={2} />
@@ -259,9 +322,9 @@ const handleSubmit = (e) => {
                         <input
                             className='width-30 height-30'
                             type="radio"
-                            name="touch"
+                            name="touch_capability"
                             value="Good"
-                            checked={formData.touch === 'Good'}
+                            checked={formData.touch_capability === 'Good'}
                             onChange={handleChange}
                         /> Good
                     </RowFlexUi>
@@ -269,9 +332,9 @@ const handleSubmit = (e) => {
                         <input
                             className='width-30 height-30'
                             type="radio"
-                            name="touch"
+                            name="touch_capability"
                             value="Not good"
-                            checked={formData.touch === 'Not good'}
+                            checked={formData.touch_capability === 'Not good'}
                             onChange={handleChange}
                         /> Not good
                     </RowFlexUi>
@@ -341,11 +404,12 @@ const handleSubmit = (e) => {
                 </RowFlexUi>
             </div>
             <SectionUI gap={2}>
-            <UiButton text="Submit" bg='primary' raised bold rounded endIcon={<PiPaperPlane />} />
+            <UiButton text="Submit" bg='primary' raised bold rounded endIcon={<PiPaperPlane />} onClick={handleSubmit}/>
             </SectionUI>
         </div>
       </div>
     </FullCenteredPage>
+    </form>
     </div>
   )
 }
