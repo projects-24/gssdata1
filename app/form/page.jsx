@@ -94,7 +94,7 @@ export default function Home() {
             console.log(data)
           const res = await Axios.post(`${URI}/add`, data,  {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${tk}`
             }
           });
           setIsLoading(false);
