@@ -90,7 +90,7 @@ export default function Home() {
     ){
         try {
             let data = formData 
-            data.added_username = user.user_id
+            data.added_username = user.email
             console.log(data)
           const res = await Axios.post(`${URI}/add`, data);
           setIsLoading(false);
