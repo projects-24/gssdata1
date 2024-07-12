@@ -45,7 +45,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!formData.email || !formData.fullname || !formData.level || !formData.password){
+    if(formData.email || formData.fullname || formData.level || formData.password){
         setalert_state(false)
         setis_loading(true)
         try {
@@ -95,7 +95,7 @@ export default function Home() {
             <div className='col'>
             <InputUi label="Full Name" onChange={handleChange} name='fullname' hint="John Doe"/>
           </div>
-          </RowFlexUi>
+          </RowFlexUi>11
  
           <SectionUI gap={2} />
           <div>
