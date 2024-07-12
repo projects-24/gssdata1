@@ -50,7 +50,7 @@ export default function Home() {
         setis_loading(true)
         try {
             setis_loading(true);
-            const res = await Axios.post(URI + '/register', formData);
+            const res = await Axios.post(URI + '/addusers', formData);
             setis_loading(false);
             setmessage('Account Created successfully');
             setalert_state('success');
