@@ -101,6 +101,7 @@ export default function Home() {
           <div>
             <InputUi select label="Level" onChange={handleChange} name='level'
             options={[
+                {'text': 'Select Level', 'value': ''},
                 {'text': 'Admin', 'value': 'admin'},
                 {'text': 'User', 'value': 'user'},
             ]}
