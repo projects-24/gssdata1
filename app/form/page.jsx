@@ -185,7 +185,7 @@ export default function Home() {
         <SectionUI gap={2} />
 
       <div>
-      <InputUi label="Box Number"  onChange={handleChange} name='box_number'  hint={"*******"}/>
+      <InputUi label="Box Number"  type={'number'} onChange={handleChange} name='box_number'  hint={"*******"}/>
       </div>
     
         <SectionUI gap={2} />
