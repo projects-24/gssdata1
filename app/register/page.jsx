@@ -50,7 +50,7 @@ export default function Home() {
         setis_loading(true)
         try {
             setis_loading(true);
-            const res = await Axios.post(URI + '/login', formData);
+            const res = await Axios.post(URI + '/register', formData);
             setis_loading(false);
             setmessage('Account Created successfully');
             setalert_state('success');
@@ -95,7 +95,7 @@ export default function Home() {
             <div className='col'>
             <InputUi label="Full Name" onChange={handleChange} name='fullname' hint="John Doe"/>
           </div>
-          </RowFlexUi>11
+          </RowFlexUi>
  
           <SectionUI gap={2} />
           <div>
